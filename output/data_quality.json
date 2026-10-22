@@ -1,0 +1,237 @@
+{
+  "status": "complete",
+  "fabricated_results": false,
+  "map_presentation": {
+    "external_tile_requests": 0,
+    "background": "busan_admin_dongs_major_roads_with_sujeong5_detail",
+    "default_extent": "Busan",
+    "candidate_scope": "Sujeong 5-dong only",
+    "busan_admin_dongs": 206,
+    "busan_major_roads": 3841,
+    "building_features": 7059,
+    "official_road_features": 935,
+    "context_load_error": null
+  },
+  "boundary": {
+    "source": "행정동 경계 SHP (입력 파일)",
+    "source_url": null,
+    "year": 2025,
+    "base_date": "20250630",
+    "adm_cd": "21030600",
+    "raw_crs": "EPSG:5186",
+    "raw_path": "C:\\Users\\USER\\Desktop\\sujeong5_codex_kit\\input\\data_archive\\boundary\\BND_ADM_DONG_PG.shp",
+    "outdated": false,
+    "success": true,
+    "path": "C:\\Users\\USER\\Desktop\\sujeong5_codex_kit\\cache\\boundary.geojson",
+    "feature_count": 1,
+    "output_crs": "EPSG:4326",
+    "area_km2": 0.712481
+  },
+  "fresh_osm_attempt": {
+    "success": false,
+    "attempted_at": "2026-10-22T11:25:18.381043+00:00",
+    "error": "Fresh Overpass request failed in this environment: local proxy 127.0.0.1:9 refused the connection. Reusing files from the earlier successful Overpass/OSMnx run.",
+    "cached_request_boundary": "C:\\Users\\USER\\Desktop\\sujeong5_codex_kit\\cache\\raw\\HangJeongDong_ver20241001.geojson",
+    "cached_boundary_version": "ver20241001",
+    "current_boundary_overlap_pct": 95.5966
+  },
+  "fire_water_status": {
+    "found": true,
+    "source_file": "부산광역시소방재난본부_부산소방재난본부_소방용수 현황.zip",
+    "reference_year": 2025,
+    "used_for_mapping": false,
+    "used_for_scoring": false,
+    "rows": 11694,
+    "columns": 20,
+    "unique_sn": 11694,
+    "duplicate_sn_rows": 0,
+    "exact_duplicate_rows": 0,
+    "facility_type_counts": {
+      "소화전(지하식)": 8294,
+      "소화전(지상식)": 2910,
+      "저수조": 271,
+      "기타": 195,
+      "급수탑": 11,
+      "관정": 7,
+      "저수지": 6
+    },
+    "coordinate_complete_rows": 8,
+    "coordinate_complete_rate": 0.000684,
+    "plausible_busan_coordinate_rows": 4,
+    "li_name_missing_rows": 10702,
+    "li_name_missing_rate": 0.91517,
+    "distinct_road_addresses": 15,
+    "dominant_road_address": "부산광역시 중구 망양로 302-13 (보수동1가)",
+    "dominant_road_address_rows": 10702,
+    "dominant_road_address_rate": 0.91517,
+    "dong_gu": {
+      "rows": 493,
+      "facility_type_counts": {
+        "소화전(지하식)": 417,
+        "소화전(지상식)": 54,
+        "저수조": 17,
+        "기타": 3,
+        "급수탑": 2
+      },
+      "coordinate_complete_rows": 0,
+      "li_name_present_rows": 0,
+      "parcel_number_present_rows": 444,
+      "distinct_road_addresses": 1,
+      "dominant_road_address_rows": 493,
+      "usable_status_rows": 493
+    },
+    "mapping_decision": "excluded: 동구 레코드에 좌표가 없고 도로명주소가 단일 반복값이라 후보별 최근접 시설을 계산할 수 없음",
+    "scope_note": "소화전·저수조 등 소방용수 현황이며 보이는 소화기 설치 현황이 아님"
+  },
+  "fire_infrastructure": {
+    "found": true,
+    "source_file": "C:\\Users\\USER\\Desktop\\sujeong5_codex_kit\\input\\data_archive\\processed\\fire_infra_clean.parquet",
+    "mapped_quality_tier": "parcel_or_reference",
+    "fallback_used_for_mapping_or_scoring": false,
+    "rows": 13151,
+    "coordinate_quality_tier_counts": {
+      "parcel_or_reference": 8104,
+      "fallback_approximate": 5047
+    },
+    "fallback_coordinate_rows": 5047,
+    "target_rows_all_quality": 23,
+    "context_rows_all_quality": 121,
+    "target_parcel_or_reference_usable": 23,
+    "context_parcel_or_reference_usable": 100,
+    "target_asset_type_counts": {
+      "fire_water": 22,
+      "emergency_fire_equipment": 1
+    },
+    "context_asset_type_counts": {
+      "fire_water": 94,
+      "emergency_fire_equipment": 6
+    },
+    "scope_note": "fire_water는 소방용수, emergency_fire_equipment는 비상소화장치입니다. parcel_or_reference 좌표도 실제 함체 실측점이 아니라 필지/참조 위치입니다."
+  },
+  "upstream_analysis": {
+    "name": "PNU-ANCHOR",
+    "repository_url": "https://github.com/PPPP98/PNU-ANCHOR",
+    "reference_commit": "e228eeb486f7beec3ec951024ac6e7c0a1eed14f",
+    "busan_residential_fire_events": 9792,
+    "target_fire_events": 21,
+    "distance_adjusted_delay_rank": 7,
+    "compared_areas": 206,
+    "q_value": 0.034,
+    "target_fires_near_under_4m_pct": 86,
+    "city_fires_near_under_4m_pct": 33
+  },
+  "sources": {
+    "buildings": {
+      "source": "국토교통부 GIS건물통합정보",
+      "path": "C:\\Users\\USER\\Desktop\\sujeong5_codex_kit\\input\\AL_D010_26_20261009\\AL_D010_26_20261009.shp",
+      "version": "20261009",
+      "source_crs": "EPSG:5186",
+      "source_features": 472608,
+      "bbox_features": 2959,
+      "target_features": 1687,
+      "residential_features": 1097,
+      "unknown_use_features": 507,
+      "search_margin_m": 0.0
+    },
+    "official_roads": {
+      "source": "도로명주소 도로구간(ROAD_BT) 분류본",
+      "path": "C:\\Users\\USER\\Desktop\\sujeong5_codex_kit\\input\\data_archive\\processed\\roads_classified.parquet",
+      "version": "202606",
+      "source_crs": "EPSG:5179",
+      "target_or_margin_features": 261,
+      "valid_width_features": 261
+    },
+    "fire_infrastructure": {
+      "path": "C:\\Users\\USER\\Desktop\\sujeong5_codex_kit\\input\\data_archive\\processed\\fire_infra_clean.parquet",
+      "mapped_quality_tier": "parcel_or_reference"
+    },
+    "busan_map_context": {
+      "boundary_path": "C:\\Users\\USER\\Desktop\\sujeong5_codex_kit\\input\\data_archive\\boundary\\BND_ADM_DONG_PG.shp",
+      "roads_path": "C:\\Users\\USER\\Desktop\\sujeong5_codex_kit\\input\\data_archive\\processed\\roads_classified.parquet",
+      "major_road_width_m": 12.0,
+      "status": "loaded",
+      "busan_admin_dongs": 206,
+      "busan_major_roads": 3841
+    },
+    "osm": {
+      "walk_network": {
+        "success": true,
+        "path": "C:\\Users\\USER\\Desktop\\sujeong5_codex_kit\\cache\\walk_network.graphml",
+        "nodes": 77,
+        "edges": 202,
+        "source": "OpenStreetMap via previous successful Overpass/OSMnx cache",
+        "cache_reused": true,
+        "freshness_unverified": true
+      },
+      "drive_network": {
+        "success": true,
+        "path": "C:\\Users\\USER\\Desktop\\sujeong5_codex_kit\\cache\\drive_network.graphml",
+        "nodes": 31,
+        "edges": 80,
+        "source": "OpenStreetMap via previous successful Overpass/OSMnx cache",
+        "cache_reused": true,
+        "freshness_unverified": true
+      },
+      "path_features": {
+        "success": true,
+        "path": "C:\\Users\\USER\\Desktop\\sujeong5_codex_kit\\cache\\path_features.geojson",
+        "features": 8,
+        "source": "OpenStreetMap via previous successful Overpass/OSMnx cache",
+        "cache_reused": true,
+        "freshness_unverified": true
+      }
+    }
+  },
+  "counts": {
+    "walk_nodes": 77,
+    "walk_edges_directed": 202,
+    "drive_edges_directed": 80,
+    "step_path_features": 0,
+    "building_polygons": 1687,
+    "residential_buildings_identified": 1097,
+    "unknown_use_buildings": 507,
+    "official_road_segments_near_boundary": 261,
+    "official_road_segments_with_valid_width": 261,
+    "selected_candidates_with_official_width": 10,
+    "candidate_pool_before_residential_density_screen": 47,
+    "excluded_low_density_candidates": 9,
+    "eligible_candidate_pool": 38,
+    "spaced_candidates": 10,
+    "complete_wsm_scores": 10,
+    "field_visibility_overrides": 0,
+    "excluded_near_existing_emergency_equipment": 0,
+    "mapped_existing_fire_infrastructure": 100,
+    "source_existing_emergency_equipment_records": 6,
+    "existing_emergency_equipment_records_used": 0
+  },
+  "rates": {
+    "building_use_unknown_rate": 0.3005,
+    "road_width_observed_rate": 0.0,
+    "official_road_width_valid_rate": 1.0,
+    "selected_candidate_official_width_match_rate": 1.0
+  },
+  "checks": {
+    "boundary_valid": true,
+    "boundary_area_km2": 0.712481,
+    "all_candidates_inside_boundary": true,
+    "minimum_spacing_m": 77.55,
+    "requested_spacing_m": 75.0,
+    "candidate_count_requirement_met": true,
+    "all_selected_candidates_meet_residential_density_floor": true,
+    "minimum_residential_density_score": 2,
+    "narrow_road_threshold_m": 4.0,
+    "existing_emergency_equipment_exclusion_m": 75.0,
+    "existing_emergency_equipment_exclusion_enabled": false,
+    "recommendation_count": 3
+  },
+  "limitations": [
+    "2026-10-22 신규 Overpass 호출은 로컬 프록시 연결 거부로 실패하여, 이전 성공 캐시를 재사용했습니다. 이전 요청 경계는 현재 경계의 95.5966%와 중첩합니다.",
+    "OSM 보행전용 경로는 공식 소방차 진입불가 판정이 아닙니다.",
+    "GIS건물통합정보의 용도 미상 건물은 주거건물 수에서 제외했습니다.",
+    "ROAD_BT는 등록 도로폭이며 주정차 등을 반영한 실제 유효폭이 아닙니다.",
+    "C는 현장 시야가 아닌 지도 네트워크 접근방향 대리지표입니다.",
+    "기존 시설의 parcel_or_reference 좌표는 필지/참조점이며 실제 함체 실측점이 아닙니다.",
+    "fallback_approximate 시설 좌표는 지도·거리·후보 제외에 사용하지 않았습니다.",
+    "별도 2025 부산 소방용수 ZIP은 동구 위치정보가 없어 공간분석에서 제외했습니다. PNU-ANCHOR 전처리 자료의 필지/참조 좌표 중 소방용수는 참고 레이어로 표시했습니다. 자료상 비상소화장치 1건은 현장 정보와 일치하지 않아 지도 표시와 후보 제외에 사용하지 않았습니다."
+  ]
+}

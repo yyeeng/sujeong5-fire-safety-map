@@ -1,0 +1,25 @@
+{
+  "found": true,
+  "source_file": "C:\\Users\\USER\\Desktop\\sujeong5_codex_kit\\input\\data_archive\\processed\\fire_infra_clean.parquet",
+  "mapped_quality_tier": "parcel_or_reference",
+  "fallback_used_for_mapping_or_scoring": false,
+  "rows": 13151,
+  "coordinate_quality_tier_counts": {
+    "parcel_or_reference": 8104,
+    "fallback_approximate": 5047
+  },
+  "fallback_coordinate_rows": 5047,
+  "target_rows_all_quality": 23,
+  "context_rows_all_quality": 121,
+  "target_parcel_or_reference_usable": 23,
+  "context_parcel_or_reference_usable": 100,
+  "target_asset_type_counts": {
+    "fire_water": 22,
+    "emergency_fire_equipment": 1
+  },
+  "context_asset_type_counts": {
+    "fire_water": 94,
+    "emergency_fire_equipment": 6
+  },
+  "scope_note": "fire_water는 소방용수, emergency_fire_equipment는 비상소화장치입니다. parcel_or_reference 좌표도 실제 함체 실측점이 아니라 필지/참조 위치입니다."
+}

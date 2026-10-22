@@ -1,0 +1,56 @@
+project:
+  area_name: "부산광역시 동구 수정제5동"
+  area_alternatives: ["수정5동", "수정제5동"]
+  evaluation_date: "2026-10-21"
+  boundary_year: 2025     # SGIS 문서에서 API 지원하는 최근 연도 확인 후 수정
+  projection_metric: "EPSG:5179"
+  projection_web: "EPSG:4326"
+
+weights:
+  firetruck_access_difficulty: 0.50
+  residential_building_density: 0.30
+  visibility_accessibility_proxy: 0.20
+
+screening:
+  road_width_narrow_m: 4.0  # PNU-ANCHOR 기본 협소도로 노출 기준(<4m); 진입불가 판정값 아님
+  road_width_sensitivity_m: [3.5, 4.0, 6.0]
+  density_buffer_m: 50
+  minimum_residential_buildings_50m: 1
+  minimum_residential_density_score: 2  # 최저 주거밀도 등급(B=1)은 최종 후보에서 제외
+  stairs_near_m: 25
+  candidate_min_spacing_m: 75
+  candidates_to_export: 10
+  recommended_sites: 3
+  road_width_invalid_if_le_m: 0
+  road_width_flag_if_gt_m: 40
+  official_road_match_max_m: 20
+  existing_emergency_equipment_exclusion_m: 75  # 필지/참조 좌표 기준 중복 검토 반경; 법정 기준 아님
+  use_existing_emergency_equipment_exclusion: false  # 현장 확인에서 기존 장치가 없다는 사용자 정보 반영
+  map_context_margin_m: 400  # 대시보드 배경에 표시할 수정5동 주변 부산 지역 범위
+
+confidence:
+  official_road_width: "medium (행정자료, 현장 유효폭 아님)"
+  osm_width_or_type: "low_to_medium (지역별 누락 가능)"
+  roadview_visibility: "manual_required"
+
+sources:
+  osm_overpass: "https://overpass-api.de/api/interpreter"
+  sgis_auth: "https://sgisapi.mods.go.kr/OpenAPI3/auth/authentication.json"
+  sgis_boundary: "https://sgisapi.mods.go.kr/OpenAPI3/boundary/hadmarea.geojson"
+  juso_portal: "https://business.juso.go.kr/"
+  buildings_shp: "https://www.data.go.kr/data/15083092/fileData.do"
+  ngi_map: "https://www.data.go.kr/data/15059719/fileData.do"
+  fire_water_status_zip: "input/source_archives/부산광역시소방재난본부_부산소방재난본부_소방용수 현황.zip"
+  fire_infrastructure_parquet: "input/data_archive/processed/fire_infra_clean.parquet"
+
+upstream_analysis:
+  name: "PNU-ANCHOR"
+  repository_url: "https://github.com/PPPP98/PNU-ANCHOR"
+  reference_commit: "e228eeb486f7beec3ec951024ac6e7c0a1eed14f"
+  busan_residential_fire_events: 9792
+  target_fire_events: 21
+  distance_adjusted_delay_rank: 7
+  compared_areas: 206
+  q_value: 0.034
+  target_fires_near_under_4m_pct: 86
+  city_fires_near_under_4m_pct: 33

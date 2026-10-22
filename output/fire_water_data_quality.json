@@ -1,0 +1,48 @@
+{
+  "found": true,
+  "source_file": "부산광역시소방재난본부_부산소방재난본부_소방용수 현황.zip",
+  "reference_year": 2025,
+  "used_for_mapping": false,
+  "used_for_scoring": false,
+  "rows": 11694,
+  "columns": 20,
+  "unique_sn": 11694,
+  "duplicate_sn_rows": 0,
+  "exact_duplicate_rows": 0,
+  "facility_type_counts": {
+    "소화전(지하식)": 8294,
+    "소화전(지상식)": 2910,
+    "저수조": 271,
+    "기타": 195,
+    "급수탑": 11,
+    "관정": 7,
+    "저수지": 6
+  },
+  "coordinate_complete_rows": 8,
+  "coordinate_complete_rate": 0.000684,
+  "plausible_busan_coordinate_rows": 4,
+  "li_name_missing_rows": 10702,
+  "li_name_missing_rate": 0.91517,
+  "distinct_road_addresses": 15,
+  "dominant_road_address": "부산광역시 중구 망양로 302-13 (보수동1가)",
+  "dominant_road_address_rows": 10702,
+  "dominant_road_address_rate": 0.91517,
+  "dong_gu": {
+    "rows": 493,
+    "facility_type_counts": {
+      "소화전(지하식)": 417,
+      "소화전(지상식)": 54,
+      "저수조": 17,
+      "기타": 3,
+      "급수탑": 2
+    },
+    "coordinate_complete_rows": 0,
+    "li_name_present_rows": 0,
+    "parcel_number_present_rows": 444,
+    "distinct_road_addresses": 1,
+    "dominant_road_address_rows": 493,
+    "usable_status_rows": 493
+  },
+  "mapping_decision": "excluded: 동구 레코드에 좌표가 없고 도로명주소가 단일 반복값이라 후보별 최근접 시설을 계산할 수 없음",
+  "scope_note": "소화전·저수조 등 소방용수 현황이며 보이는 소화기 설치 현황이 아님"
+}
