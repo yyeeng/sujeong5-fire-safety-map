@@ -22,6 +22,8 @@ import requests
 import yaml
 from dotenv import load_dotenv
 
+from . import DEFAULT_CONFIG, PROJECT_ROOT
+
 
 GITHUB_BOUNDARY_URL = (
     "https://raw.githubusercontent.com/schwa456/hangjeongdong/master/"
@@ -444,7 +446,7 @@ def register_reused_osm_cache(cache_dir: Path, manifest: dict[str, Any]) -> None
 
 
 def run(config_path: Path, *, reuse_osm_cache: bool = False) -> int:
-    root = config_path.resolve().parent
+    root = PROJECT_ROOT
     cache_dir = root / "cache"
     raw_dir = cache_dir / "raw"
     input_dir = root / "input"
@@ -543,7 +545,7 @@ def run(config_path: Path, *, reuse_osm_cache: bool = False) -> int:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--config", default="config.yaml", type=Path)
+    parser.add_argument("--config", default=DEFAULT_CONFIG, type=Path)
     parser.add_argument(
         "--reuse-osm-cache",
         action="store_true",

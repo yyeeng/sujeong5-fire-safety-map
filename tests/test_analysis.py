@@ -3,14 +3,14 @@ from __future__ import annotations
 import pandas as pd
 import pytest
 
-from analysis_core import (
+from fire_safety_map.analysis import (
     firetruck_difficulty_score,
     parse_width_m,
     residential_density_scores,
     visibility_accessibility_score,
     weighted_score,
 )
-from official_data import official_building_category, repair_korean_mojibake
+from fire_safety_map.official import official_building_category, repair_korean_mojibake
 
 
 def test_width_parser_handles_units_and_invalid_ranges() -> None:

@@ -1,17 +1,17 @@
-# QGIS 작업본
+# QGIS 사용 안내
 
-`build_qgis_package.py`는 분석 산출물을 하나의 GeoPackage로 묶고 기본 QGIS 스타일을
+`fire-safety-qgis`는 분석 산출물을 하나의 GeoPackage로 묶고 기본 QGIS 스타일을
 GeoPackage 내부 `layer_styles` 테이블에 저장합니다.
 
 ```powershell
-.\.venv\Scripts\python.exe main.py --config config.yaml
-.\.venv\Scripts\python.exe build_qgis_package.py
+.\.venv\Scripts\python.exe -m fire_safety_map.dashboard --config config/project.yaml
+.\.venv\Scripts\python.exe -m fire_safety_map.qgis
 ```
 
 QGIS에서 `output/qgis/sujeong5_fire_safety.gpkg`를 열고 다음 레이어를 추가하면 됩니다.
 
-- `candidates`: 후보 10곳과 우선 3곳
-- `existing_fire_infrastructure`: 비상소화장치·소방용수
+- `candidates`: 보이는 소화기 설치 검토 지점 10곳
+- `existing_fire_infrastructure`: 대상지역 소방용수
 - `boundary`: 수정5동 행정동 경계
 - `buildings`: 공식 GIS건물통합정보
 - `official_roads`: 공식 도로명주소 도로와 등록폭

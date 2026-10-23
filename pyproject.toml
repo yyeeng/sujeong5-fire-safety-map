@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sujeong5-fire-safety-map"
+version = "1.0.0"
+description = "부산 동구 골목 화재안전 분석과 주민용 보이는 소화기 지도"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "folium>=0.19",
+  "geopandas>=1.0",
+  "networkx>=3.2",
+  "osmnx>=2.0,<3",
+  "pandas>=2.2",
+  "pyarrow>=18",
+  "pyogrio>=0.10",
+  "pyproj>=3.6",
+  "python-dotenv>=1.0",
+  "pyyaml>=6",
+  "requests>=2.31",
+  "shapely>=2.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[project.scripts]
+fire-safety-download = "fire_safety_map.download:main"
+fire-safety-build = "fire_safety_map.dashboard:main"
+fire-safety-qgis = "fire_safety_map.qgis:main"
+
+[tool.setuptools.packages.find]
+include = ["fire_safety_map*"]
+
+[tool.pytest.ini_options]
+addopts = "-p no:cacheprovider"
+testpaths = ["tests"]

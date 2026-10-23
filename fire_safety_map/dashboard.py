@@ -19,14 +19,15 @@ import pandas as pd
 import yaml
 from shapely import union_all
 
-from analysis_core import (
+from . import DEFAULT_CONFIG, PROJECT_ROOT
+from .analysis import (
     firetruck_difficulty_score,
     parse_width_m,
     residential_density_scores,
     visibility_accessibility_score,
     weighted_score,
 )
-from official_data import (
+from .official import (
     find_latest_building_shp,
     load_official_buildings,
     load_official_roads,
@@ -998,15 +999,14 @@ def build_map(
         candidate_marker.add_to(candidate_layer)
         marker_names[rank] = candidate_marker.get_name()
 
-    if busan_dongs_web.empty:
-        busan_bounds = tuple(boundary_web.total_bounds)
-    else:
-        busan_bounds = tuple(busan_dongs_web.total_bounds)
-    minx, miny, maxx, maxy = busan_bounds
+    # 처음 열었을 때 부산 전체가 아니라 대상지역과 주변 맥락이 바로 읽히도록
+    # 대상지역 경계를 기본 화면 범위로 사용한다. 부산 행정동·주요도로 레이어는
+    # 이 범위 밖으로 이동하거나 축소했을 때도 계속 배경으로 남는다.
+    minx, miny, maxx, maxy = tuple(boundary_web.total_bounds)
     fmap.fit_bounds(
         [[miny, minx], [maxy, maxx]],
         padding_top_left=(20, 20),
-        padding_bottom_right=(490, 20),
+        padding_bottom_right=(560, 20),
     )
     legend = """
     <div class="map-key" style="position:fixed;bottom:26px;left:24px;z-index:9999;background:rgba(255,255,255,.96);
@@ -1064,7 +1064,7 @@ def failure_outputs(output_dir: Path, manifest: dict[str, Any], failures: list[s
 
 
 def analyze(config_path: Path) -> int:
-    root = config_path.resolve().parent
+    root = PROJECT_ROOT
     cache_dir = root / "cache"
     output_dir = root / "output"
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -1078,7 +1078,7 @@ def analyze(config_path: Path) -> int:
     fire_water_quality = profile_fire_water_status(fire_water_zip)
     manifest_path = cache_dir / "download_manifest.json"
     if not manifest_path.exists():
-        failure_outputs(output_dir, {}, ["cache/download_manifest.json이 없습니다. download_data.py를 먼저 실행하세요."])
+        failure_outputs(output_dir, {}, ["cache/download_manifest.json이 없습니다. fire-safety-download를 먼저 실행하세요."])
         return 2
     manifest = read_json(manifest_path)
     official_building_path = find_latest_building_shp(root / "input")
@@ -1469,9 +1469,6 @@ def analyze(config_path: Path) -> int:
     ]
     selected_web[csv_columns].to_csv(
         output_dir / "candidates.csv", index=False, encoding="utf-8-sig"
-    )
-    selected_web[csv_columns].to_csv(
-        output_dir / "budget_candidates.csv", index=False, encoding="utf-8-sig"
     )
     sensitivity_rows: list[dict[str, Any]] = []
     for threshold in settings.get("road_width_sensitivity_m", [3.5, 4.0, 6.0]):
@@ -1894,7 +1891,6 @@ PNU-ANCHOR는 부산 주택화재 {int(pnu_context.get('busan_residential_fire_e
 
 - `output/map.html`: 경계·도로·계단·후보 10곳·조건 충족 시 추천 3곳
 - `output/candidates.csv`, `output/candidates.geojson`: 점수와 근거·결측 포함
-- `output/budget_candidates.csv`: 3·5·10개소 예산 시나리오 단계 포함
 - `output/roads.geojson`: 분석에 사용한 OSM 보행도로
 - `output/official_roads.geojson`: 후보 도로폭 연결에 사용한 2026-06 도로명주소 도로구간
 - `output/existing_fire_infrastructure.geojson`: 대상지역 안에서 위치 품질을 통과한 소방용수 참고 레이어
@@ -1904,28 +1900,6 @@ PNU-ANCHOR는 부산 주택화재 {int(pnu_context.get('busan_residential_fire_e
 - `output/fire_infrastructure_data_quality.json`: PNU-ANCHOR 시설 좌표 등급과 사용 범위
 """
     (output_dir / "report.md").write_text(report, encoding="utf-8")
-    budget_report = f"""# 수정5동 보이는 소화기 예산 검토 위치안
-
-## 예산 규모별 위치
-
-- **3개소안:** {scenario_3}
-- **5개소안:** {scenario_5}
-- **10개소안:** {scenario_10}
-
-단가·부대공사비가 제공되지 않아 금액은 계산하지 않았습니다. 5개소안은 3개소안에 4~5순위를 더하고, 10개소안은 1~10순위를 모두 포함하는 누적 시나리오입니다.
-
-## 전체 후보 10개소
-
-{all_candidates_section}
-
-## 보고 시 주의 문구
-
-- 설치 확정지가 아니라 **현장조사 전 예산 검토 후보 구역 중심점**입니다.
-- 점수는 인터뷰 기반 주관적 가중치 A 50%, B 30%, C 20%를 적용한 **현장조사 우선순위용 지도 기반 잠정 적합도**입니다. 실제 인구·보행량·기존 소방시설·토지권리는 포함되지 않았습니다.
-- 기존 시설 중복, 실제 유효 도로폭, 시야, 설치 벽면과 토지·관리 권한은 현장에서 확인해야 합니다.
-- 2026-10-22 신규 Overpass 호출은 프록시 연결 거부로 실패하여 앞선 성공 캐시를 재사용했습니다. 이전 요청 경계와 2025-06-30 공식 경계의 중첩률은 {fresh_osm_attempt.get('current_boundary_overlap_pct')}%입니다.
-"""
-    (output_dir / "budget_sites.md").write_text(budget_report, encoding="utf-8")
     print(f"Created {len(selected)} candidates; recommendations={int(selected['recommended'].sum())}")
     print(f"Map: {output_dir / 'map.html'}")
     return 0 if can_recommend else 4
@@ -1933,7 +1907,7 @@ PNU-ANCHOR는 부산 주택화재 {int(pnu_context.get('busan_residential_fire_e
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--config", default="config.yaml", type=Path)
+    parser.add_argument("--config", default=DEFAULT_CONFIG, type=Path)
     args = parser.parse_args()
     raise SystemExit(analyze(args.config))
 

@@ -87,7 +87,6 @@ PNU-ANCHOR는 부산 주택화재 9,792건을 이용해 **어느 지역을 먼�
 
 - `output/map.html`: 경계·도로·계단·후보 10곳·조건 충족 시 추천 3곳
 - `output/candidates.csv`, `output/candidates.geojson`: 점수와 근거·결측 포함
-- `output/budget_candidates.csv`: 3·5·10개소 예산 시나리오 단계 포함
 - `output/roads.geojson`: 분석에 사용한 OSM 보행도로
 - `output/official_roads.geojson`: 후보 도로폭 연결에 사용한 2026-06 도로명주소 도로구간
 - `output/existing_fire_infrastructure.geojson`: 대상지역 안에서 위치 품질을 통과한 소방용수 참고 레이어
